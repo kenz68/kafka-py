@@ -1,3 +1,9 @@
+# Start kafka from docker
+```docker run -d -p 9092:9092 --name broker apache/kafka:latest```
+
+## ref
+```https://github.com/apache/kafka/blob/trunk/docker/examples/docker-compose-files```
+
 # Kafka Producer, Consumer, and Topic Monitor Scripts
 
 This project provides scripts for producing, consuming, and monitoring Kafka topics using the
