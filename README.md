@@ -7,8 +7,7 @@
 # Kafka Producer, Consumer, and Topic Monitor Scripts
 
 This project provides scripts for producing, consuming, and monitoring Kafka topics using the
-`kafka-python` library. The scripts utilize `click` for command-line argument parsing and SSL for 
-secure communication with Kafka.
+`kafka-python` library.
 
 ## Directory Structure
 
@@ -24,9 +23,8 @@ secure communication with Kafka.
 
 ## Requirements
 
-- Python 3.12.3
+- `python 3.11`
 - `kafka-python` library (version 2.0.2)
-- `click` library (version 8.1.7)
 
 ## Setup
 
