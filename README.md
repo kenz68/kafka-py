@@ -49,7 +49,6 @@ secure communication with Kafka.
    
    ```
    kafka-python==2.0.2
-   click==8.1.7
    ```
 
 ## Usage
@@ -60,7 +59,7 @@ The `producer.py` script sends message to a specified kafka topic at a configura
 #### Command
 
 ```
-python produce.py <bootstrap_server> <topic> <num_partitions> <messages_per_second>
+python produce.py
 ```
 
 - `<bootstrap_server>`: Kafka server address (e.g `localhost:9092`)
@@ -73,7 +72,7 @@ The script will recreate the topic with the specified number of partitions befor
 #### Example
 
 ```
-python produce.py localhost:9092 test_topic 3 5
+python produce.py
 ```
 
 This command creates a `test_topic` with 3 partitions and sends 5 messages per second.
