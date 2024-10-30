@@ -1,7 +1,7 @@
 import datetime
 import time
 
-from kafka import KafkaAdminClient
+from kafka import KafkaAdminClient, KafkaProducer
 from kafka.admin import NewTopic
 from kafka.errors import UnknownTopicOrPartitionError
 
@@ -34,11 +34,33 @@ def recreate_topic(bootstrap_server, topic, num_partitions):
     admin_client.close()
 
 
-
 def produce_messages(bootstrap_server, topic, num_partitions, messages_per_second):
     """Kafka message produce script."""
     # Recreate the topic with the specified number of partitions
     recreate_topic(bootstrap_server, topic, num_partitions)
+
+    # Initialize kafka producer
+    producer = KafkaProducer(bootstrap_servers=bootstrap_server)
+    interval = 1 / messages_per_second
+    message_number = 0
+    start_time = time.time()
+
+    try:
+        while True:
+            message_number += 1
+            message = f"[{dt_str()}]: Message {message_number}".encode("utf-8")
+            producer.send(topic, message)
+            print(f"[{dt_str()}]: Message {message_number} sent.")
+
+            # Maintain the desired sending rate
+            next_send_time = start_time + message_number * interval
+            sleep_time = next_send_time - time.time()
+            if sleep_time > 0:
+                time.sleep(sleep_time)
+    except KeyboardInterrupt:
+        pass
+    finally:
+        producer.close()
 
 
 if __name__ == '__main__':
