@@ -3,6 +3,8 @@ import time
 
 from kafka import KafkaAdminClient, KafkaConsumer, TopicPartition
 
+from constant import env
+
 
 def dt_str() -> str:
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -98,4 +100,4 @@ def monitor_topic(bootstrap_servers, topic, consumer_group, interval):
 
 
 if __name__ == "__main__":
-    monitor_topic("localhost:9092", "test_topic", "my-consumer-group", 10)
+    monitor_topic(env.BOOTSTRAP_SERVER, env.TEST_TOPIC, env.CONSUMER_GROUP, 10)

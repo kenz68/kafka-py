@@ -2,6 +2,7 @@ import time
 
 from kafka import KafkaConsumer
 import datetime
+from constant import env
 
 def dt_str() -> str:
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -28,4 +29,4 @@ def consume_message(bootstrap_server, topic, messages_per_second, group_id):
         consumer.close()
 
 if __name__ == '__main__':
-    consume_message("localhost:9092", "test_topic", 2, "my-consumer-group")
+    consume_message(env.BOOTSTRAP_SERVER, env.TEST_TOPIC, 2, env.CONSUMER_GROUP)

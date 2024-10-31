@@ -23,7 +23,7 @@ This project provides scripts for producing, consuming, and monitoring Kafka top
 
 ## Requirements
 
-- `python 3.11`
+- `python 3.11.1`
 - `kafka-python` library (version 2.0.2)
 
 ## Setup
@@ -63,7 +63,7 @@ python produce.py
 - `<bootstrap_server>`: Kafka server address (e.g `localhost:9092`)
 - `<topic>`: kafka topic name
 - `<num_partitions>`: Number of partitions for the topic
-- `<messages_per_second>`: Rate at which messages will sent
+- `<messages_per_second>`: Rate at which messages will send
 
 The script will recreate the topic with the specified number of partitions before starting message production.
 
@@ -74,3 +74,20 @@ python produce.py
 ```
 
 This command creates a `test_topic` with 3 partitions and sends 5 messages per second.
+
+
+# Quick start
+```
+docker-compose up -d
+```
+## Verify docker images are running
+```docker ps```
+
+Make sure kafka is running at `localhost:9092`, use `Offset Explorer` or `Datagrip` to connect
+
+## Run following command in separate console (3)
+```
+python producer.py
+python consumer.py
+python monitor_topic.py
+```

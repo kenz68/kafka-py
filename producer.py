@@ -4,7 +4,7 @@ import time
 from kafka import KafkaAdminClient, KafkaProducer
 from kafka.admin import NewTopic
 from kafka.errors import UnknownTopicOrPartitionError
-
+from constant import env
 
 def dt_str() -> str:
     return datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -12,6 +12,7 @@ def dt_str() -> str:
 
 def recreate_topic(bootstrap_server, topic, num_partitions):
     """Delete the existing Kafka topic if it exists, then create a new one with the specified number of partitions."""
+    # Try to connect by Kafka client such as 'Offset Explorer' OR 'Datagrip' to make sure kafka is connectable
     admin_client = KafkaAdminClient(bootstrap_servers=bootstrap_server)
 
     # Try to delete the topic if it exists
@@ -64,4 +65,4 @@ def produce_messages(bootstrap_server, topic, num_partitions, messages_per_secon
 
 
 if __name__ == '__main__':
-    produce_messages("localhost:9092", "test_topic", 3, 5)
+    produce_messages(env.BOOTSTRAP_SERVER, env.TEST_TOPIC, 3, 5)
